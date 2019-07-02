@@ -6,6 +6,7 @@ let g:loaded_vimux_elixir_test = 1
 command RunAllElixirTests :call s:RunAllElixirTests()
 command RunFocusedElixirTests :call s:RunFocusedElixirTests()
 command RunCurrentElixirTests :call s:RunCurrentElixirTests()
+command RunFailedElixirTests :call s:RunFailedElixirTests() 
 
 function s:RunAllElixirTests()
    call VimuxRunCommand("clear && " . "mix test")
@@ -21,3 +22,8 @@ function s:RunFocusedElixirTests()
    let file_name = @%
    call VimuxRunCommand("clear && mix test " . file_name . ":" . line_number)
 endfunction
+
+function s:RunFailedElixirTests()
+   call VimuxRunCommand("clear && " . "mix test --failed")
+endfunction
+
